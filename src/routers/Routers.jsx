@@ -12,6 +12,7 @@ export const routers=createBrowserRouter([
     {
         path: '/',
         Component: Root,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 index: true,
@@ -38,10 +39,10 @@ export const routers=createBrowserRouter([
                 hydrateFallbackElement: <p>Loading...</p>,
                 loader: ()=>fetch('../phones.json')
             },
-            {
-                path: '*',
-                Component: ErrorPage
-            }
+            // {
+            //     path: '*',
+            //     Component: ErrorPage
+            // }
         ]
     }
     
