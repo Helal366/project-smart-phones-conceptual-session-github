@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 const getFavotitesFromLocalStorage=()=>{
     const favListStringified=localStorage.getItem('fav');
     if(favListStringified){
@@ -11,19 +13,20 @@ const addFavoriteToLocalStorage=(phone)=>{
     let tempFavListParsed=[];
     const isExist=favListParsed.find(p=>p.id===phone.id)
     if(isExist){
-        return alert('!!??? Phone already added to Favorite List !!???')
+        return toast.error('This phone is already added in favorite list !!!!!')
     }else{
         tempFavListParsed=[...favListParsed, phone];
         const favListStringified=JSON.stringify(tempFavListParsed)
         saveFavoritesListToLocalStorege(favListStringified);
-        alert(`Wow! ${phone.name} is added to favorite list `)
+        toast.success(`${phone.name} is added to favorite list `)
     }    
 };
 const removeFavFromLS=id=>{
     const favListParsed=getFavotitesFromLocalStorage();
     const tempFavListParsed=favListParsed.filter(p=>p.id!==id);
     const favListStringified=JSON.stringify(tempFavListParsed);
-    saveFavoritesListToLocalStorege(favListStringified)
+    saveFavoritesListToLocalStorege(favListStringified);
+    toast.success(`Removed successfully`)
 };
 const saveFavoritesListToLocalStorege=(favListStringified)=>{
     localStorage.setItem('fav', favListStringified);
@@ -41,19 +44,20 @@ const addCartToLS=phone=>{
     const cartListParsed=getCartFromLS();
     const isExist=cartListParsed.find(p=>p.id===phone.id);
     if(isExist){
-        return alert('!!!??This phone is already added to cart!!!??')
+        return toast.error('!!!??This phone is already added to cart!!!??')
     }else{
         const tempCartListParsed=[...cartListParsed, phone];
         const tempCartListStringified=JSON.stringify(tempCartListParsed)
         localStorage.setItem('cart', tempCartListStringified);
-        alert(`${phone.name} is added to cart list`);
+        toast.success(`${phone.name} is added to cart list`);
     }
 };
 const removeCartFromLS=id=>{
     const cartListParsed=getCartFromLS();
     const tempCartListParsed=cartListParsed.filter(p=>p.id!==id);
     const tempCartListStringified=JSON.stringify(tempCartListParsed);
-    localStorage.setItem('cart', tempCartListStringified)
+    localStorage.setItem('cart', tempCartListStringified);
+    toast.success(`Removed successfully`)
 }
 export {
     getFavotitesFromLocalStorage,

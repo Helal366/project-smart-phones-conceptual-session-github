@@ -24,7 +24,6 @@ const handleCartAdd=()=>{
 };
 
   const priceData= Object.entries(price);
-  // console.log(priceData[0][0])
   const storageData= Object.entries(storage);
 
   return (
