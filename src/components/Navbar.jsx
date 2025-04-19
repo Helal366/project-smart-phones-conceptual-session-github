@@ -1,11 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, NavLink } from 'react-router';
 import { MdShoppingCart } from "react-icons/md";
 import { MdBookmarkAdd } from "react-icons/md";
 import { CartContext } from '../useContexts/CartContext';
+import { getCartFromLS } from '../utilities/localStorage';
 
 const Navbar = () => {
-  const {cart}=useContext(CartContext);
+   const {cart, setCart}=useContext(CartContext);
+      useEffect(()=>{
+          const cartListFromLS=getCartFromLS(); 
+          setCart(cartListFromLS);
+      },[setCart]);
     return (
         <div>
             <div className="navbar p-0 bg-base-100 shadow-sm max-w-screen-2xl mx-auto px-8 md:px-12 lg:px-16 xl:px-24">
