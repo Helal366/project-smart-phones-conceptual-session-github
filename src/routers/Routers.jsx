@@ -5,6 +5,7 @@ import ErrorPage from "../pages/ErrorPage";
 import Favorites from "../pages/Favorites";
 import About from "../pages/About";
 import PhoneDetails from "../pages/PhoneDetails";
+import Cart from "../pages/Cart";
 
 
 export const routers=createBrowserRouter([
@@ -17,19 +18,25 @@ export const routers=createBrowserRouter([
                 path: '/',
                 Component: Home,
                 hydrateFallbackElement: <p>Loading...</p>,
-                loader: ()=>fetch('phones.json'),
+                loader: ()=>fetch('/phones.json'),
             },
             {
                 path: '/favorites',
                 Component: Favorites
             },
             {
+                path: '/cart',
+                Component: Cart
+            },
+            {
                 path: '/about',
                 Component: About
             },
             {
-                path: '/phoneDetails',
-                Component: PhoneDetails
+                path: '/phoneDetails/:jhankar',
+                Component: PhoneDetails,
+                hydrateFallbackElement: <p>Loading...</p>,
+                loader: ()=>fetch('../phones.json')
             },
             {
                 path: '*',
